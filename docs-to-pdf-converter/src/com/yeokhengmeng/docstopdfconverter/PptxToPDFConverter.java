@@ -1,21 +1,20 @@
 package com.yeokhengmeng.docstopdfconverter;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics2D;
+
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.pdf.PdfWriter;
+import org.apache.poi.xslf.usermodel.XMLSlideShow;
+import org.apache.poi.xslf.usermodel.XSLFSlide;
+
+import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-
-import org.apache.poi.xslf.usermodel.XMLSlideShow;
-import org.apache.poi.xslf.usermodel.XSLFSlide;
-
-import com.itextpdf.text.Document;
-import com.itextpdf.text.Image;
-import com.itextpdf.text.Rectangle;
-import com.itextpdf.text.pdf.PdfWriter;
+import java.util.List;
 
 
 public class PptxToPDFConverter extends Converter{
@@ -27,15 +26,13 @@ public class PptxToPDFConverter extends Converter{
 	}
 
 
-	private XSLFSlide[] slides;
+	private List<XSLFSlide> slides;
 	
 
 	@Override
 	public void convert() throws Exception {
 		loading();
 		
-
-
 		Dimension pgsize = processSlides();
 		
 		processing();
@@ -89,16 +86,16 @@ public class PptxToPDFConverter extends Converter{
 	}
 	
 	protected int getNumSlides(){
-		return slides.length;
+		return slides.size();
 	}
 	
 	
 	protected void drawOntoThisGraphic(int index, Graphics2D graphics){
-		slides[index].draw(graphics);
+		slides.get(index).draw(graphics);
 	}
 	
 	protected Color getSlideBGColor(int index){
-		return slides[index].getBackground().getFillColor();
+		return this.slides.get(index).getBackground().getFillColor();
 	}
 	
 	

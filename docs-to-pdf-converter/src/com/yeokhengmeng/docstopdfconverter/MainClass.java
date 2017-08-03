@@ -1,15 +1,9 @@
 package com.yeokhengmeng.docstopdfconverter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.Option;
+
+import java.io.*;
 
 
 
@@ -32,17 +26,22 @@ public class MainClass{
 			converter = processArguments(args);
 		} catch (Exception e){
 			System.out.println("\n\nInput\\Output file not specified properly.");
+			System.exit(1);
 			return;
 		}
-
-
+		
 		if(converter == null){
 			System.out.println("Unable to determine type of input file.");
 		} else {
 			try {
 				converter.convert();
-			} catch (Exception e) {
+				System.exit(0);
+			}
+			//
+			catch (Exception e) {
 				e.printStackTrace();
+				
+				System.exit(2);
 			}
 		}
 
@@ -78,8 +77,7 @@ public class MainClass{
 			if(outPath == null){
 				outPath = changeExtensionToPDF(inPath);
 			}
-
-
+			
 			String lowerCaseInPath = inPath.toLowerCase();
 			
 			InputStream inStream = getInFileStream(inPath);
@@ -118,11 +116,10 @@ public class MainClass{
 				break;
 
 				}
-
-
 			}
-			
-		} catch (CmdLineException e) {
+		}
+		//
+		catch (CmdLineException e) {
 			// handling of wrong arguments
 			System.err.println(e.getMessage());
 			parser.printUsage(System.err);

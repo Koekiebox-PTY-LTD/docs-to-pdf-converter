@@ -1,11 +1,12 @@
 package com.yeokhengmeng.docstopdfconverter;
+import org.docx4j.Docx4J;
+import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
+
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
 
-import org.docx4j.Docx4J;
-import org.docx4j.convert.in.Doc;
-import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
+//import org.docx4j.convert.in.Doc;
 
 
 public class DocToPDFConverter extends Converter {

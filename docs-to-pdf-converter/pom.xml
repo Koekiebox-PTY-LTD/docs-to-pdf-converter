@@ -42,15 +42,34 @@
 							<mainClass>com.yeokhengmeng.docstopdfconverter.MainClass</mainClass>
 						</manifest>
 					</archive>
+
 					<descriptorRefs>
 						<descriptorRef>jar-with-dependencies</descriptorRef>
 					</descriptorRefs>
 				</configuration>
 			</plugin>
+
+			<!--mvn dependency:copy-dependencies -DoutputDirectory=target/libraries_req-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.0.2</version>
+				<configuration>
+					<archive>
+						<index>true</index>
+						<manifest>
+							<addClasspath>false</addClasspath>
+							<mainClass>com.yeokhengmeng.docstopdfconverter.MainClass</mainClass>
+						</manifest>
+						<manifestEntries>
+							<CompiledBy>JasonB</CompiledBy>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 	
-
 	<dependencies>
 		<dependency>
 			<groupId>args4j</groupId>
